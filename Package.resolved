@@ -14,8 +14,8 @@
         "package": "Apodini",
         "repositoryURL": "https://github.com/Apodini/Apodini.git",
         "state": {
-          "branch": "develop",
-          "revision": "0f9d7cb794042c8460e88f9e225b3ee0a4a0bd2f",
+          "branch": "feature/defaultHTTPConfiguration",
+          "revision": "366d4654cfd6d9351bcca55f9af7cceb1df86fd7",
           "version": null
         }
       },

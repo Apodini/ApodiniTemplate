@@ -4,11 +4,19 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "swift build --build-tests --enable-test-discovery -Xswiftc -g -Xswiftc -Xfrontend -Xswiftc -serialize-debugging-options",
+            "command": "swift build",
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "presentation": {
+                "panel": "dedicated"
             }
+        },
+        {
+            "label": "buildtests",
+            "type": "shell",
+            "command": "swift build --build-tests --enable-test-discovery"
         }
     ]
 }

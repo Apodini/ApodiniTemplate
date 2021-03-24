@@ -4,11 +4,18 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug Tests",
-            "program": "${workspaceFolder}/.build/x86_64-unknown-linux-gnu/debug/ApodiniPackageTests.xctest",
+            "name": "Run",
+            "program": "${workspaceFolder}/.build/debug/WebService",
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "build"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test",
+            "program": "${workspaceFolder}/.build/debug/ApodiniTemplatePackageTests.xctest",
+            "preLaunchTask": "buildtests"
         }
     ]
 }
