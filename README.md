@@ -25,9 +25,9 @@ The web service exposes a RESTful web API and an OpenAPI description:
 ```swift
 struct ExampleWebService: WebService {
     var configuration: Configuration {
-        ExporterConfiguration()
-            .exporter(RESTInterfaceExporter.self)
-            .exporter(OpenAPIInterfaceExporter.self)
+        REST {
+            OpenAPI()
+        }
     }
 
     var content: some Component {
