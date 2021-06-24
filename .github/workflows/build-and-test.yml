@@ -11,59 +11,52 @@ on:
       - release
 
 jobs:
-  macos:
-    name: macOS ${{ matrix.configuration }} test build
-    runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        configuration: [debug, release]
-    steps:
-    - uses: actions/checkout@v2
-    - uses: maxim-lobanov/setup-xcode@v1.2
-      with:
-        xcode-version: latest
-    - uses: actions/cache@v2
-      with:
-        path: .build
-        key: ${{ runner.os }}-spm-cache-${{ hashFiles('Package.resolved') }}
-    - name: Check Xcode version
-      run: xcodebuild -version
-    - name: Check Swift version
-      run: swift --version
-    - name: Build
-      if: matrix.configuration == 'release'
-      run: swift build --configuration ${{ matrix.configuration }}
-    - name: Build & Test
-      if: matrix.configuration == 'debug'
-      run: swift test --configuration ${{ matrix.configuration }} --enable-code-coverage
   linux:
-    name: Linux ${{ matrix.linux }} ${{ matrix.configuration }} test build
+    name: Linux ${{ matrix.linux }} ${{ matrix.configuration }}
     container:
-      image: swift:${{ matrix.linux }}
+      image: swift:5.3-${{ matrix.linux }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         linux: [bionic, xenial, focal, amazonlinux2, centos8]
-        configuration: [debug, release]
+        configuration: [debug, release, release_testing]
     steps:
     - uses: actions/checkout@v2
-    - name: Install libsqlite3
+    - name: Install libsqlite3, lsof and zsh
       if: ${{ !(startsWith( matrix.linux, 'centos' ) || startsWith( matrix.linux, 'amazonlinux' )) }}
-      run: apt-get update && apt-get install -y --no-install-recommends libsqlite3-dev
+      run: apt-get update && apt-get install -y --no-install-recommends libsqlite3-dev lsof zsh
     - name: Install libsqlite3
-      if: ${{ startsWith( matrix.linux, 'centos' ) || startsWith( matrix.linux, 'amazonlinux' ) }}
-      run: yum update -y && yum install -y sqlite-devel
+      if: startsWith( matrix.linux, 'amazonlinux' )
+      run: yum update -y && yum install -y sqlite-devel lsof zsh
+    - name: Install libsqlite3
+      if: startsWith( matrix.linux, 'centos' )
+      run: yum update -y --nobest && yum install -y sqlite-devel lsof zsh
     - uses: actions/cache@v2
       with:
         path: .build
-        key: ${{ runner.os }}-${{matrix.linux}}-spm-cache-${{ hashFiles('Package.resolved') }}
+        key: ${{ runner.os }}-${{matrix.linux}}-spm-${{ hashFiles('Package.resolved') }}
     - name: Check Swift version
       run: swift --version
-    - name: Build
+
+    - name: Release Build # Ensuring release build runs successfully without -enable-testing flag
       if: matrix.configuration == 'release'
-      run: swift build --configuration ${{ matrix.configuration }}
-    - name: Build & Test
+      run: swift build -c release
+    - name: Release Build & Test
+      if: matrix.configuration == 'release_testing'
+      run: swift test -c release --enable-test-discovery -Xswiftc -enable-testing -Xswiftc -DRELEASE_TESTING
+    - name: Debug Build & Test
       if: matrix.configuration == 'debug'
-      run: swift test --configuration ${{ matrix.configuration }} --enable-test-discovery
+      run: swift test -c debug --enable-test-discovery
+
+    - name: Run Deployment Provider Tests DEBUG
+      if: ${{ github.event.inputs.runDeploymentProviderTests && matrix.linux == 'focal' && matrix.configuration == 'debug' }}
+      run: |
+        swift test -c debug --enable-test-discovery --filter ApodiniDeployTests.LocalhostDeploymentProviderTests
+        swift test -c debug --enable-test-discovery --filter ApodiniDeployTests.LambdaDeploymentProviderTests
+      env:
+        ENABLE_DEPLOYMENT_PROVIDER_TESTS: YES
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
