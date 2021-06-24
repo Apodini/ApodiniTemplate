@@ -1,5 +1,5 @@
 // swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+
 import PackageDescription
 
 
@@ -15,7 +15,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .branch("develop"))
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.2.0"))
     ],
     targets: [
         .target(
