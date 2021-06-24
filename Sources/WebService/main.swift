@@ -5,9 +5,9 @@ import ApodiniREST
 
 struct ExampleWebService: WebService {
     var configuration: Configuration {
-        ExporterConfiguration()
-            .exporter(RESTInterfaceExporter.self)
-            .exporter(OpenAPIInterfaceExporter.self)
+        REST {
+            OpenAPI()
+        }
     }
 
     var content: some Component {
@@ -16,4 +16,4 @@ struct ExampleWebService: WebService {
 }
 
 
-try ExampleWebService.main()
+ExampleWebService.main()
