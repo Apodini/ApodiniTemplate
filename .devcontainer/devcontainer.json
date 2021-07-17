@@ -6,7 +6,7 @@
         "--security-opt", "seccomp=unconfined"
     ],
     "appPort": [
-        8080
+        80
     ],
     "extensions": [
         "pvasek.sourcekit-lsp--dev-unofficial",

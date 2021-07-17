@@ -1,6 +1,11 @@
 name: SwiftLint
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/swiftlint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
 
 jobs:
   swiftlint:
@@ -11,3 +16,5 @@ jobs:
         uses: norio-nomura/action-swiftlint@3.2.1
         with:
           args: --strict
+        env:
+          DIFF_BASE: ${{ github.base_ref }}

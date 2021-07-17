@@ -16,7 +16,7 @@
         {
             "label": "buildtests",
             "type": "shell",
-            "command": "swift build --build-tests --enable-test-discovery"
+            "command": "swift build --build-tests"
         }
     ]
 }
