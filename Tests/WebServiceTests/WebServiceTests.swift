@@ -1,4 +1,4 @@
-@testable import WebService
+import WebService
 import XCTest
 
 
