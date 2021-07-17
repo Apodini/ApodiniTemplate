@@ -19,53 +19,77 @@ If you are not using macOS or don't want to use Xcode, you can use [Visual Studi
 3. Press "Reopen in Container" and wait until the docker container is build
 4. You can now build the code using the [build keyboard shortcut](https://code.visualstudio.com/docs/getstarted/keybindings#_tasks) and run and test the code within the docker container using the Run and Debug area.
 
+### CLion on macOS and Windows
+
+You can use [CLion with the Swift plugin](https://www.jetbrains.com/help/clion/swift.html) which also works on Windows and [allows you to use the Swift plugin in CLion on Windows ](https://blog.jetbrains.com/objc/2021/03/swift-on-windows-in-clion/)
+
 ## Structure
 
 The web service exposes a RESTful web API and an OpenAPI description:  
 ```swift
-struct ExampleWebService: WebService {
-    var configuration: Configuration {
-        REST {
-            OpenAPI()
-        }
-    }
+@main
+import Apodini
+import ApodiniOpenAPI
+import ApodiniREST
+import ArgumentParser
 
-    var content: some Component {
-        Greeter()
+
+@main
+struct ExampleWebService: WebService {
+  @Option(help: "The port the web service is offered at")
+  var port: Int = 80
+   
+   
+  var configuration: Configuration {
+    HTTPConfiguration(port: port)
+    REST {
+      OpenAPI()
     }
+  }
+   
+  var content: some Component {
+    Greeter()
+  }
 }
 ```
 
 The example web service exposes a single `Handler` named `Greeter`:  
 ```swift
 struct Greeter: Handler {
-    @Parameter var name: String = "World"
-    
-    
-    func handle() -> String {
-        "Hello, \(name)! 👋"
-    }
-}
-```
-
-## RESTful API
-
-You can access the `Greeter` `Handler` at `http://localhost:8080/v1`.  
-The `@Parameter` is exposed as a parameter in the URL. E.g., you can send a request to `localhost:8080/v1?name=Paul` to get the following response:  
-```json
-{
-  "data" : "Hello, Paul! 👋",
-  "_links" : {
-    "self" : "http://127.0.0.1:8080/v1"
+  @Parameter var name: String = "World"
+   
+   
+  func handle() -> String {
+    "Hello, \(name)! 👋"
   }
 }
 ```
 
-## OpenAPI
+### RESTful API
 
-You can access the OpenAPI document at `http://localhost:8080/openapi`.  
-The Swagger UI is also automatically generated and accessible at `http://localhost:8080/openapi-ui`.
+You can access the `Greeter` `Handler` at `http://localhost/v1`.  
+The `@Parameter` is exposed as a parameter in the URL. E.g., you can send a request to `localhost/v1?name=Paul` to get the following response:  
+```json
+{
+  "data" : "Hello, Paul! 👋",
+  "_links" : {
+    "self" : "http://127.0.0.1/v1"
+  }
+}
+```
+
+### OpenAPI
+
+You can access the OpenAPI document at `http://localhost/openapi`.  
+The Swagger UI is also automatically generated and accessible at `http://localhost/openapi-ui`.
 
 ## Continous Integration
 
 The repository contains GitHub Actions to automatically build and test the example web service on a wide variety of platforms and configurations.
+
+### Docker
+
+The template includes docker files and docker compose files to start and deploy a web service.  
+In addition, the template includes a GitHub Action that builds a new docker image on every release and pushes the image to the GitHub package registry.  
+You can start up the web service using published docker images using `$ docker compose up` using the `docker-compose.yml` file.  
+The `docker-compose-development.yml` file can be used to test the setup by building the web service locally using `$ docker compose -f docker-compose-development.yml up`.  

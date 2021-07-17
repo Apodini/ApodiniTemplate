@@ -1,4 +1,3 @@
-@testable import WebService
 import XCTest
 
 

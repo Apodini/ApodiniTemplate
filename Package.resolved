@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/Apodini/Apodini.git",
         "state": {
           "branch": null,
-          "revision": "be6417b0b4ea7e4d7b77747099ad082bc45a2ad9",
-          "version": "0.2.0"
+          "revision": "c1193105f1a4b7320bbd3f5c404e6110746b31d8",
+          "version": "0.3.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/swift-server/async-http-client.git",
         "state": {
           "branch": null,
-          "revision": "3fd0658dd91864099481b23740afd1757d1f0634",
-          "version": "1.4.0"
+          "revision": "8e4d51908dd49272667126403bf977c5c503f78f",
+          "version": "1.5.0"
         }
       },
       {
@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/vapor/fluent-postgres-driver.git",
         "state": {
           "branch": null,
-          "revision": "11d4fce0c5d8a027a5d131439c9c94dd3230cb8e",
-          "version": "2.1.2"
+          "revision": "afe159ce915e752ab5f5b76479dc78a17051ce73",
+          "version": "2.1.3"
         }
       },
       {
@@ -213,8 +213,8 @@
         "repositoryURL": "https://github.com/OpenCombine/OpenCombine.git",
         "state": {
           "branch": null,
-          "revision": "9bba5081344163296ddf537048566b95513b8f39",
-          "version": "0.11.0"
+          "revision": "28993ae57de5a4ea7e164787636cafad442d568c",
+          "version": "0.12.0"
         }
       },
       {
@@ -255,11 +255,11 @@
       },
       {
         "package": "Runtime",
-        "repositoryURL": "https://github.com/wickwirew/Runtime.git",
+        "repositoryURL": "https://github.com/Supereg/Runtime.git",
         "state": {
           "branch": null,
-          "revision": "a848b81e1a0100801f572e5273ffe4352fd54088",
-          "version": "2.2.2"
+          "revision": "596e22a518bb3f8177cd796cd77e5386098a33f8",
+          "version": "2.2.3"
         }
       },
       {
@@ -294,8 +294,8 @@
         "repositoryURL": "https://github.com/vapor/sql-kit.git",
         "state": {
           "branch": null,
-          "revision": "211ce34be6a2dcd8b9f0c04f6a561c642a940c86",
-          "version": "3.9.0"
+          "revision": "dd87127c7b005237b24ee24917c515ecae9ff0ef",
+          "version": "3.9.1"
         }
       },
       {
@@ -348,8 +348,17 @@
         "repositoryURL": "https://github.com/swift-server/swift-backtrace.git",
         "state": {
           "branch": null,
-          "revision": "54a65d6391a1467a896d0d351ff2de6f469ee53c",
-          "version": "1.2.3"
+          "revision": "d3e04a9d4b3833363fb6192065b763310b156d54",
+          "version": "1.3.1"
+        }
+      },
+      {
+        "package": "swift-collections",
+        "repositoryURL": "https://github.com/apple/swift-collections",
+        "state": {
+          "branch": null,
+          "revision": "3426dba9ee5c9f8e4981b0fc9d39a818d36eec28",
+          "version": "0.0.4"
         }
       },
       {
@@ -438,17 +447,17 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "605d8c86cfc51cf875b9e09b3c8f55e4137b0b55",
-          "version": "4.47.0"
+          "revision": "2ada54b7ce56cc6934cd2c0207bef2305bfbd7a1",
+          "version": "4.48.2"
         }
       },
       {
         "package": "vapor-aws-lambda-runtime",
-        "repositoryURL": "https://github.com/vapor-community/vapor-aws-lambda-runtime",
+        "repositoryURL": "https://github.com/vapor-community/vapor-aws-lambda-runtime.git",
         "state": {
           "branch": null,
-          "revision": "eef25d71854e87ba7e6f0388b8bc38b6ca865cc5",
-          "version": "0.6.1"
+          "revision": "610aaed1cdd7ef434ed23bc7006000948a221527",
+          "version": "0.6.2"
         }
       },
       {
