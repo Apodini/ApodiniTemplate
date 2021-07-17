@@ -45,4 +45,4 @@ jobs:
     - name: Check Swift version
       run: swift --version
     - name: Build and test
-      run: swift test
+      run: swift test -Xswiftc -Xfrontend -Xswiftc -sil-verify-none
