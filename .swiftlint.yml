@@ -8,9 +8,10 @@
 
 # Apodini SwiftLint file Apodini
   
-# The whitelist_rules configuration also includes rules that are enabled by default to provide a good overview of all rules.
+# The only_rules configuration also includes rules that are enabled by default to provide a good overview of all rules.
 only_rules:
   - attributes
+    # Attributes should be on their own lines in functions and types, but on the same line as variables and imports.
   - anyobject_protocol
     # Prefer using AnyObject over class for class-only protocols.
   - array_init
@@ -35,6 +36,8 @@ only_rules:
     # Colons should be next to the identifier when specifying a type and next to the key in dictionary literals.
   - comma
     # There should be no space before and one after any comma.
+  - comment_spacing
+    # Prefer at least one space after slashes for comments.
   - compiler_protocol_init
     # The initializers declared in compiler protocols such as ExpressibleByArrayLiteral shouldn't be called directly.
   - computed_accessors_order
@@ -85,6 +88,8 @@ only_rules:
     # Number of associated values in an enum case should be low
   - explicit_init
     # Explicitly calling .init() should be avoided.
+  - fallthrough
+    # Fallthrough should be avoided.
   - fatal_error_message
     # A fatalError call should have a message.
   - file_length
@@ -124,6 +129,8 @@ only_rules:
     # Implicitly unwrapped optionals should be avoided when possible.
   - inclusive_language
     # Identifiers should use inclusive language that avoids discrimination against groups of people based on race, gender, or socioeconomic status
+  - indentation_width
+    # Indent code using either one tab or the configured amount of spaces, unindent to match previous indentations. Don’t indent the first line.
   - inert_defer
     # If defer is at the end of its parent scope, it will be executed right where it is anyway.
   - is_disjoint
@@ -249,6 +256,8 @@ only_rules:
     # Test files should contain a single QuickSpec or XCTestCase class.
   - sorted_first_last
     # Prefer using `min()`` or `max()`` over `sorted().first` or `sorted().last`
+  - sorted_imports
+    # Imports should be sorted.
   - statement_position
     # Else and catch should be on the same line, one space after the previous declaration.
   - static_operator
