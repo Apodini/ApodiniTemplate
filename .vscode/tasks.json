@@ -4,7 +4,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "swift build -Xswiftc -Xfrontend -Xswiftc -sil-verify-none",
+            "command": "swift build",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -16,7 +16,7 @@
         {
             "label": "buildtests",
             "type": "shell",
-            "command": "swift build -Xswiftc -Xfrontend -Xswiftc -sil-verify-none --build-tests"
+            "command": "swift build --build-tests"
         }
     ]
 }

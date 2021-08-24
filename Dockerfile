@@ -25,7 +25,7 @@ WORKDIR /build
 COPY . .
 
 # Build everything, with optimizations
-RUN swift build -Xswiftc -Xfrontend -Xswiftc -sil-verify-none -c release
+RUN swift build -c release
 
 # Switch to the staging area
 WORKDIR /staging
