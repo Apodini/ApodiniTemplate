@@ -1,4 +1,12 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.5
+
+//
+// This source file is part of the Apodini Template open source project
+//
+// SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+//
+// SPDX-License-Identifier: MIT
+//
 
 import PackageDescription
 
@@ -6,7 +14,7 @@ import PackageDescription
 let package = Package(
     name: "ApodiniTemplate",
     platforms: [
-        .macOS(.v10_15)
+        .macOS(.v12)
     ],
     products: [
         .executable(
@@ -15,7 +23,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.3.0"))
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.5.0"))
     ],
     targets: [
         .executableTarget(
@@ -28,7 +36,9 @@ let package = Package(
         ),
         .testTarget(
             name: "WebServiceTests",
-            dependencies: ["WebService"]
+            dependencies: [
+                .target(name: "WebService")
+            ]
         )
     ]
 )

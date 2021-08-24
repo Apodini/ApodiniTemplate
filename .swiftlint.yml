@@ -1,9 +1,16 @@
-# Apodini SwiftLint file Apodini
+#                   
+# This source file is part of the Apodini Template open source project
+#
+# SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+#
+# SPDX-License-Identifier: MIT
+#
 
-# The only_rules configuration also includes rules that are enabled by default to provide a good overview of all rules.
+# Apodini SwiftLint file Apodini
+  
+# The whitelist_rules configuration also includes rules that are enabled by default to provide a good overview of all rules.
 only_rules:
   - attributes
-    # Attributes should be on their own lines in functions and types, but on the same line as variables and imports.
   - anyobject_protocol
     # Prefer using AnyObject over class for class-only protocols.
   - array_init
@@ -28,8 +35,6 @@ only_rules:
     # Colons should be next to the identifier when specifying a type and next to the key in dictionary literals.
   - comma
     # There should be no space before and one after any comma.
-  - comment_spacing
-    # Prefer at least one space after slashes for comments.
   - compiler_protocol_init
     # The initializers declared in compiler protocols such as ExpressibleByArrayLiteral shouldn't be called directly.
   - computed_accessors_order
@@ -80,8 +85,6 @@ only_rules:
     # Number of associated values in an enum case should be low
   - explicit_init
     # Explicitly calling .init() should be avoided.
-  - fallthrough
-    # Fallthrough should be avoided.
   - fatal_error_message
     # A fatalError call should have a message.
   - file_length
@@ -121,8 +124,6 @@ only_rules:
     # Implicitly unwrapped optionals should be avoided when possible.
   - inclusive_language
     # Identifiers should use inclusive language that avoids discrimination against groups of people based on race, gender, or socioeconomic status
-  - indentation_width
-    # Indent code using either one tab or the configured amount of spaces, unindent to match previous indentations. Don’t indent the first line.
   - inert_defer
     # If defer is at the end of its parent scope, it will be executed right where it is anyway.
   - is_disjoint
@@ -165,18 +166,14 @@ only_rules:
     # Modifier order should be consistent.
   - multiline_arguments
     # Arguments should be either on the same line, or one per line.
-  - multiline_arguments_brackets
-    # Multiline arguments should have their surrounding brackets in a new line.
   - multiline_function_chains
     # Chained function calls should be either on the same line, or one per line.
   - multiline_literal_brackets
     # Multiline literals should have their surrounding brackets in a new line.
   - multiline_parameters
     # Functions and methods parameters should be either on the same line, or one per line.
-  - multiline_parameters_brackets
-    # Multiline parameters should have their surrounding brackets in a new line.
   - nesting
-    # Types and statements should only be nested to a certain level deep.
+    # Types and functions should only be nested to a certain level deep.
     # See nesting below for the exact configuration.
   - nimble_operator
     # Prefer Nimble operator overloads over free matcher functions.
@@ -208,8 +205,6 @@ only_rules:
     # Combine multiple pattern matching bindings by moving keywords out of tuples.
   - prefer_self_type_over_type_of_self
     # Prefer Self over type(of: self) when accessing properties or calling methods.
-  - prefer_zero_over_explicit_init
-    # Prefer .zero over explicit init with zero parameters (e.g. CGPoint(x: 0, y: 0))
   - private_action
     # IBActions should be private.
   - private_outlet
@@ -254,8 +249,6 @@ only_rules:
     # Test files should contain a single QuickSpec or XCTestCase class.
   - sorted_first_last
     # Prefer using `min()`` or `max()`` over `sorted().first` or `sorted().last`
-  - sorted_imports
-    # Imports should be sorted.
   - statement_position
     # Else and catch should be on the same line, one space after the previous declaration.
   - static_operator
@@ -284,13 +277,9 @@ only_rules:
   - type_body_length
     # Type bodies should not span too many lines.
     # See large_tuple below for the exact configuration.
-  - type_contents_order
-    # Specifies the order of subtypes, properties, methods & more within a type.
   - type_name
     # Type name should only contain alphanumeric characters, start with an uppercase character and span between 3 and 40 characters in length.
     # Excluded types are listed below.
-  - unavailable_function
-    # Unimplemented functions should be marked as unavailable.
   - unneeded_break_in_switch
     # Avoid using unneeded break statements.
   - unneeded_parentheses_in_closure_argument
@@ -328,21 +317,14 @@ only_rules:
     # Don’t include vertical whitespace (empty line) after opening braces.
   - void_return
     # Prefer -> Void over -> ().
-  - weak_delegate
-    # Delegates should be weak to avoid reference cycles.
-  - xct_specific_matcher
-    # Prefer specific XCTest matchers over XCTAssertEqual and XCTAssertNotEqual
   - xctfail_message
     # An XCTFail call should include a description of the assertion.
   - yoda_condition
     # The variable should be placed on the left, the constant on the right of a comparison operator.
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
-  - Carthage
-  - Pods
   - .build
   - .swiftpm
-  - R.generated.swift
 
 closure_body_length: # Closure bodies should not span too many lines.
   - 35 # warning - default: 20
@@ -370,6 +352,11 @@ identifier_name:
     - ok
     - or
     - p8
+    - of
+    - s3
+    - at
+    - to
+    - in
 
 large_tuple: # Tuples shouldn't have too many members. Create a custom type instead.
   - 2 # warning - default: 2
@@ -383,7 +370,7 @@ line_length: # Lines should not span too many characters.
   ignores_function_declarations: false # default: false
   ignores_interpolated_strings: true # default: false
 
-nesting: # Types should be nested at most 2 level deep, and statements should be nested at most 5 levels deep.
+nesting: # Types should be nested at most 2 level deep, and functions should be nested at most 5 levels deep.
   type_level:
     warning: 2 # warning - default: 1
   function_level:
