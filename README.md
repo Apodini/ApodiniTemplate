@@ -1,3 +1,13 @@
+<!--
+
+This source file is part of the Apodini Template open source project
+
+SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+
+SPDX-License-Identifier: MIT
+
+-->
+
 # Apodini Template Repository
 
 This repository includes an example Apodini web service that can be used as a starting point for an Apodini web service.  
