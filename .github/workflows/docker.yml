@@ -15,8 +15,11 @@ on:
 
 jobs:
   docker:
-    name: Docker Build and Push Image
+    name: Docker Build and Push Image ${{ matrix.architecture }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [arm64, amd64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,7 +31,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
-          platforms: linux/arm64,linux/amd64
+          platforms: linux/${{ matrix.architecture }}
       - name: Set up docker buildx
         uses: docker/setup-buildx-action@v1
         with:
@@ -44,9 +47,33 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile${{ matrix.architecture }}
           push: true
-          platforms: linux/arm64,linux/amd64
-          tags: ghcr.io/apodini/template:beta
+          platforms: linux/${{ matrix.architecture }}
+          tags: ghcr.io/apodini/template:beta-${{ matrix.architecture }}
       - name: Image digest
         run: echo ${{ steps.buildandpush.outputs.digest }}
+  dockermanifest:
+    needs: [docker]
+    name: Create Multi-CPU Architecture Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Get latest tag
+        id: latesttag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+        with:
+          fallback: latest
+      - name: Log in to the container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create and Push Multi Architecture Image
+        run: |
+            docker manifest create ghcr.io/apodini/template:beta \
+              --amend ghcr.io/apodini/template:beta-amd64 \
+              --amend ghcr.io/apodini/template:beta-arm64
+            docker manifest push ghcr.io/apodini/template:beta
