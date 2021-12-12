@@ -59,7 +59,7 @@ jobs:
             baseimage=${{ steps.baseimage.outputs.value }}
           push: true
           platforms: linux/${{ matrix.architecture }}
-          tags: ghcr.io/apodini/template:beta-${{ matrix.architecture }}
+          tags: ghcr.io/apodini/template:latest-${{ matrix.architecture }},ghcr.io/apodini/template:${{ steps.latesttag.outputs.tag }}-${{ matrix.architecture }}
       - name: Image digest
         run: echo ${{ steps.buildandpush.outputs.digest }}
   dockermanifest:
@@ -82,7 +82,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Create and Push Multi Architecture Image
         run: |
-            docker manifest create ghcr.io/apodini/template:beta \
-              --amend ghcr.io/apodini/template:beta-amd64 \
-              --amend ghcr.io/apodini/template:beta-arm64
-            docker manifest push ghcr.io/apodini/template:beta
+            docker manifest create ghcr.io/apodini/template:latest \
+              --amend ghcr.io/apodini/template:latest-amd64 \
+              --amend ghcr.io/apodini/template:latest-arm64
+            docker manifest create ghcr.io/apodini/template:${{ steps.latesttag.outputs.tag }} \
+              --amend ghcr.io/apodini/template:${{ steps.latesttag.outputs.tag }}-amd64 \
+              --amend ghcr.io/apodini/template:${{ steps.latesttag.outputs.tag }}-arm64
+            docker manifest push ghcr.io/apodini/template:latest
+            docker manifest push ghcr.io/apodini/template:${{ steps.latesttag.outputs.tag }}
