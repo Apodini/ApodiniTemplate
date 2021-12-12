@@ -9,7 +9,7 @@
 # ================================
 # Build image
 # ================================
-FROM swiftlang/swift:nightly-focal as build
+FROM ghcr.io/apodini/swift@sha256:53b4295f95dc1eafcbc2e03c5dee41839e9652ca31397b9feb4d8903fe1b54ea as build
 
 # Install OS updates and, if needed, sqlite3
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -47,7 +47,7 @@ RUN [ -d "$(swift build --package-path /build -c release --show-bin-path)/WebSer
 # ================================
 # Run image
 # ================================
-FROM swiftlang/swift:nightly-focal as run
+FROM ghcr.io/apodini/swift@sha256:53b4295f95dc1eafcbc2e03c5dee41839e9652ca31397b9feb4d8903fe1b54ea as run
 
 # Make sure all system packages are up to date.
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
