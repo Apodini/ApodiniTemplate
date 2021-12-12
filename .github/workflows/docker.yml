@@ -55,8 +55,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args:
-            baseimage: ${{ steps.baseimage.outputs.value }}
+          build-args: |
+            baseimage=${{ steps.baseimage.outputs.value }}
           push: true
           platforms: linux/${{ matrix.architecture }}
           tags: ghcr.io/apodini/template:beta-${{ matrix.architecture }}
