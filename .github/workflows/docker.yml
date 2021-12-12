@@ -46,7 +46,7 @@ jobs:
         uses: haya14busa/action-cond@v1
         id: baseimage
         with:
-          cond: ${{ matrix.architecture == arm64 }}
+          cond: ${{ matrix.architecture == "arm64" }}
           if_true: 'swiftarm/swift:5.5.1-ubuntu-focal'
           if_false: 'swift:focal'
       - name: Build and push docker image
