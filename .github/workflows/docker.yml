@@ -42,12 +42,21 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Determine Base Image
+        uses: haya14busa/action-cond@v1
+        id: baseimage
+        with:
+          cond: ${{ matrix.architecture == arm64 }}
+          if_true: 'swiftarm/swift:5.5.1-ubuntu-focal'
+          if_false: 'swift:focal'
       - name: Build and push docker image
         id: buildandpush
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile${{ matrix.architecture }}
+          file: ./Dockerfile
+          build-args:
+            baseimage: ${{ steps.baseimage.outputs.value }}
           push: true
           platforms: linux/${{ matrix.architecture }}
           tags: ghcr.io/apodini/template:beta-${{ matrix.architecture }}

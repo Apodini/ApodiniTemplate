@@ -15,7 +15,7 @@ services:
     image: "apodini/template:latest"
     build:
       context: ./
-      dockerfile: ./Dockerfileamd64
+      dockerfile: ./Dockerfile
     expose:
       - "80"
     command: ["--port", "80"]
