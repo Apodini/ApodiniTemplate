@@ -14,7 +14,7 @@ import PackageDescription
 let package = Package(
     name: "ApodiniTemplate",
     platforms: [
-        .macOS(.v12)
+        .macOS(.v11)
     ],
     products: [
         .executable(
@@ -23,7 +23,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.6.2"))
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.7.0"))
     ],
     targets: [
         .executableTarget(
