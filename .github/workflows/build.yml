@@ -20,6 +20,9 @@ jobs:
     uses: Apodini/.github/.github/workflows/build-and-test.yml@v1
     with:
       packagename: ApodiniTemplate
+      testdocc: false
   docker-compose-test:
     name: Docker Compose Test
     uses: Apodini/.github/.github/workflows/docker-compose-test.yml@v1
+    with:
+      testscript: test.sh
