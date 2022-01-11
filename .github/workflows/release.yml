@@ -1,23 +1,26 @@
-#                   
-# This source file is part of the Apodini Template open source project
-# 
+#
+# This source file is part of the Apodini open source project
+#
 # SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
-# 
+#
 # SPDX-License-Identifier: MIT
-# 
+#
 
-name: Create Release
+name: Release
 
 on:
-  push:
-    tags:
-      - '*.*.*'
+  release:
+    types: [published]
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v0.1.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  docs:
+    name: Generate Docs
+    uses: Apodini/.github/.github/workflows/docs.yml@v1
+    with:
+      packagename: WebService
+  docker-build-and-push:
+    name: Docker Build and Push
+    uses: Apodini/.github/.github/workflows/docker-build-and-push.yml@v1
+    with:
+      image-name: apodini/template
