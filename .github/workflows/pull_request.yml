@@ -18,7 +18,6 @@ jobs:
     uses: Apodini/.github/.github/workflows/build-and-test.yml@v1
     with:
       packagename: ApodiniTemplate
-      testdocc: false
   reuse_action:
     name: REUSE Compliance Check
     uses: Apodini/.github/.github/workflows/reuse.yml@v1

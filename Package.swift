@@ -23,7 +23,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.7.0"))
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.9.1"))
     ],
     targets: [
         .executableTarget(
